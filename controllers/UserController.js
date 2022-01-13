@@ -30,7 +30,7 @@ class UserController{
     async create(req, res){
         var { email, name, password } = req.body;
 
-        if(email == undefined || password == undefined || name == undefined){
+        if(email == undefined || email == '' || password == undefined || password == '' || name == undefined || name == ''){
             res.status(400);
             res.json({err: "Parâmetros inválido. Verifique se está sendo passado os parâmetros: name, email e/ou password."});
             return;
@@ -49,9 +49,7 @@ class UserController{
         }       
 
         await User.new(email, password, name);
-
-        res.status(200);
-        return;
+        res.send("Usuário cadastrado!");
     }
 
     async edit(req, res){
